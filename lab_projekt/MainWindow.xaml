@@ -4,9 +4,83 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab_projekt"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="1080" Width="1920" 
+        WindowState="Maximized"
+        ResizeMode="CanMinimize"
+        SizeToContent="Manual">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="12pt"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="12pt"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="{x:Type PasswordBox}">
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="12pt"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
 
+        <Style x:Key="btn" TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="12pt"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+            
+    </Window.Resources>
+    
+    <Grid>
+        
+        
+        <Grid.Background>
+            <ImageBrush ImageSource="/images/back1.png"/>
+        </Grid.Background>
+        
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="White">
+
+            <TextBlock Text="Login"></TextBlock>
+            <TextBox Name="Login"  BorderThickness="1" Width="300" Height="30" MaxLength="15" MaxLines="1" Margin="1"/>
+            <TextBlock Text="Hasło"></TextBlock>
+            <PasswordBox Name="Password"  BorderThickness="1" Width="300" Height="30" MaxLength="15" Margin="0,0,0,20"/>
+            <Button Name="btn1" Style="{StaticResource btn}" Click="OnClick1" ClickMode="Press">Zaloguj</Button>
+            <Button Name="btn2" Style="{StaticResource btn}" Click="OnClick2" ClickMode="Hover">Zarejestruj</Button>
+            <Button Name="btn3" Style="{StaticResource btn}" Click="OnClick3" ClickMode="Hover">Wyjdź</Button>
+        </StackPanel>
+        <Image Stretch="Fill" Width="600" Height="300" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+            <Image.Source>
+                <BitmapImage UriSource="/images/123444.png"/>
+            </Image.Source>
+        </Image>
     </Grid>
 </Window>
