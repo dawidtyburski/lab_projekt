@@ -43,13 +43,8 @@ namespace lab_projekt
                     {
                         Login.Text = "Zalogowano!!";
                     }
-                    else break;
-
                 }
-                else break;
-
             }
-
         }
         void OnClick2(object sender, RoutedEventArgs e)
         {
