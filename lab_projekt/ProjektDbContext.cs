@@ -11,6 +11,8 @@ namespace lab_projekt
     class ProjektDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Truck> Trucks { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"server=(localdb)\mssqllocaldb;database=ProjektDb;trusted_connection=true;");
