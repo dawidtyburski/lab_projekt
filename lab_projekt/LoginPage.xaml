@@ -62,7 +62,9 @@
 
         
         <Grid.Background>
-            <SolidColorBrush Color="LightGray" />
+            
+                <ImageBrush ImageSource="/images/logback.jpg"/>
+            
         </Grid.Background>
 
 

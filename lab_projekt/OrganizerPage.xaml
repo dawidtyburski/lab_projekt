@@ -38,7 +38,7 @@
     </Page.Resources>
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="LightGray" />
+            <ImageBrush ImageSource="/images/logback.jpg"/>
         </Grid.Background>
         <StackPanel Width ="1170" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,25,0,0">
             <Button Name="btn1" Style="{StaticResource btno}" Margin="0,5,0,0" Click="OnClick1" ClickMode="Press">
