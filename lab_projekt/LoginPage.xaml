@@ -76,7 +76,7 @@
             <Button Name="btn2" Style="{StaticResource btn}" Click="OnClick2" ClickMode="Hover">Zarejestruj</Button>
             <Button Name="btn3" Style="{StaticResource btn}" Click="OnClick3" ClickMode="Hover">Wyjdź</Button>
         </StackPanel>
-        <Image Stretch="Fill" Width="200" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
+        <Image Stretch="Fill" Width="200" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
             <Image.Source>
                 <BitmapImage UriSource="/images/123444.png"/>
             </Image.Source>

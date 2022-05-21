@@ -7,13 +7,54 @@
       Height="700" Width="1200"
       HorizontalAlignment="Center" 
       VerticalAlignment="Center">
+    <Page.Resources>
+        <Style x:Key="btno" TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Agency FB Condensed"/>
+            <Setter Property="FontSize" Value="12pt"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="110"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
 
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="LightGray" />
         </Grid.Background>
-
-
+        <StackPanel Width ="1170" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,25,0,0">
+            <Button Name="btn1" Style="{StaticResource btno}" Margin="0,5,0,0" Click="OnClick1" ClickMode="Press">
+                <StackPanel Width="110">
+                    <TextBlock Margin="25,0,0,0">Dodaj Pojazd</TextBlock>
+                    <Image Width="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,-20,0,0" Source="images/plus.png"></Image>
+                </StackPanel>
+                
+            </Button>
+            <Button Name="btn2" Style="{StaticResource btno}" Margin="120,-30,0,0" Click="OnClick2" ClickMode="Press">
+                <StackPanel Width="110">
+                    <TextBlock Margin="25,0,0,0">Dodaj Kierowce</TextBlock>
+                    <Image Width="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,-20,0,0" Source="images/plus.png"></Image>
+                </StackPanel>
+            </Button>
+        </StackPanel>
 
         <StackPanel Width ="1170" Height="600" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin ="0,0,0,30" Background="White">
             

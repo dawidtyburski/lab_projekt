@@ -32,9 +32,9 @@ namespace lab_projekt
             public string G { get; set; }
             public string H { get; set; }
         }
-            
 
-       
+
+
         public OrganizerPage()
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace lab_projekt
 
             ProjektDbContext db = new ProjektDbContext();
             var trucks = from t in db.Trucks
-                        select t;
+                         select t;
 
             foreach (var item in trucks)
             {
@@ -52,6 +52,13 @@ namespace lab_projekt
 
             dataGrid1.ItemsSource = list;
         }
-        
+        void OnClick1(object sender, RoutedEventArgs e)
+        {
+
+        }
+        void OnClick2(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

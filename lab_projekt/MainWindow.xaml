@@ -8,7 +8,7 @@
         WindowState="Minimized"
         ResizeMode="CanMinimize"
         SizeToContent="Manual"
-        Title="FleetOrganizer">
+        Title="TruckOrganizer">
 
     <Grid>
         <Grid.Background>

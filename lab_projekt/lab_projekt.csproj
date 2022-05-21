@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="images\111.png" />
     <None Remove="images\123444.png" />
-    <None Remove="images\back.png" />
-    <None Remove="images\back1.png" />
+    <None Remove="images\plus.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,10 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="images\111.png" />
     <Resource Include="images\123444.png" />
-    <Resource Include="images\back.png" />
-    <Resource Include="images\back1.png" />
+    <Resource Include="images\plus.png" />
   </ItemGroup>
 
 </Project>
