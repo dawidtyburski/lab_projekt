@@ -48,7 +48,7 @@ namespace lab_projekt
         }
         void OnClick3(object sender, RoutedEventArgs e)
         {
-
+            App.Current.MainWindow.Close();
         }
     }
 }
