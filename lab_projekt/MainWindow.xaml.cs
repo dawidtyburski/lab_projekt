@@ -25,5 +25,6 @@ namespace lab_projekt
         {
             InitializeComponent();
         }
+
     }
 }

@@ -18,4 +18,11 @@ namespace lab_projekt
             optionsBuilder.UseSqlServer(@"server=(localdb)\mssqllocaldb;database=ProjektDb;trusted_connection=true;");
         }
     }
+    public class User
+    {
+        public int UserId { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public bool Admin { get; set; }
+    }
 }

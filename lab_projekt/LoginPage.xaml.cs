@@ -26,25 +26,45 @@ namespace lab_projekt
         }
         void OnClick1(object sender, RoutedEventArgs e)
         {
-            string l = Login.Text;
-            string p = Password.Password;
-            ProjektDbContext db = new ProjektDbContext();
-            var users = from u in db.Users
-                        select u;
-            foreach (var item in users)
+            using (ProjektDbContext db = new ProjektDbContext())
             {
-                if (l == item.Username)
+                string l = Login.Text;
+                string p = Password.Password;
+
+                var users = from u in db.Users
+                            select u;
+
+                if (db.Users.Any(o => o.Username == l))
                 {
-                    if (p == item.Password)
+                    foreach (var item in users)
                     {
-                        NavigationService.Navigate(new Uri("/OrganizerPage.xaml", UriKind.Relative));
+                        if (l == item.Username)
+                        {
+                            if (p == item.Password)
+                            {
+                                NavigationService.Navigate(new Uri("/OrganizerPage.xaml", UriKind.Relative));
+                            }
+                            else
+                            {
+                                MessageBox.Show("Nieprawidlowe haslo", "wrong_password", MessageBoxButton.OK);
+                            }
+                        }
                     }
                 }
-            }
+                else
+                {
+                    var result = MessageBox.Show("Nieprawidlowy login", "wrong_login", MessageBoxButton.OK);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        Login.Text = null;
+                        Password.Password = null;
+                    }
+                }             
+            }         
         }
         void OnClick2(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/RegisterPage.xaml", UriKind.Relative));
         }
         void OnClick3(object sender, RoutedEventArgs e)
         {

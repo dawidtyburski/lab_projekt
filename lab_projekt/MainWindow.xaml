@@ -4,15 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab_projekt"
-        Height="700" Width="1200" 
-        WindowState="Minimized"
+        Height="600" Width="900" 
         ResizeMode="CanMinimize"
         SizeToContent="Manual"
-        Title="TruckOrganizer">
+        Title="MyTrucks">
 
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="LightGray" />
+            <SolidColorBrush Color="White" />
         </Grid.Background>
         <Frame Source="/LoginPage.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>
