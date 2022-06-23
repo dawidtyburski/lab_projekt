@@ -42,7 +42,13 @@ namespace lab_projekt
                         {
                             if (p == item.Password)
                             {
-                                NavigationService.Navigate(new Uri("/OrganizerPage.xaml", UriKind.Relative));
+                                MainWindow windowToShow = new MainWindow();
+                                windowToShow.Show();
+                                Application.Current.MainWindow.Dispatcher.Invoke(() =>
+                                {
+                                    Application.Current.MainWindow.Close();
+                                });
+                                break;
                             }
                             else
                             {
@@ -64,7 +70,7 @@ namespace lab_projekt
         }
         void OnClick2(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/RegisterPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/RegisterPage.xaml", UriKind.Relative));
         }
         void OnClick3(object sender, RoutedEventArgs e)
         {

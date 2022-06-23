@@ -13,6 +13,6 @@
         <Grid.Background>
             <SolidColorBrush Color="White" />
         </Grid.Background>
-        <Frame Source="/LoginPage.xaml" NavigationUIVisibility="Hidden"/>
+        <Frame Source="/Pages/MainPage.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

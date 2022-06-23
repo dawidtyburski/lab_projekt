@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="images\123444.png" />
     <None Remove="images\log.jpg" />
-    <None Remove="images\logback.jpg" />
     <None Remove="images\plus.png" />
   </ItemGroup>
 
@@ -23,9 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="images\123444.png" />
     <Resource Include="images\log.jpg" />
-    <Resource Include="images\logback.jpg" />
     <Resource Include="images\plus.png" />
   </ItemGroup>
 

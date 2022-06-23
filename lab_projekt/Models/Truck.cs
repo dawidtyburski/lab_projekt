@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Models
 {
@@ -18,5 +19,6 @@ namespace Models
         public DateTime Insurance { get; set; }
         public DateTime TechReview { get; set; }
         public DateTime TachoLeg { get; set; }
+
     }
 }

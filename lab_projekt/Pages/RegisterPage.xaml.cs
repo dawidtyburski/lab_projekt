@@ -82,7 +82,7 @@ namespace lab_projekt
                     var result = MessageBox.Show("Użytkownik dodany", "new_user", MessageBoxButton.OK);
                     if (result == MessageBoxResult.OK)
                     {
-                        NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+                        NavigationService.Navigate(new Uri("/Pages/LoginPage.xaml", UriKind.Relative));
                     }                 
                 }
                 else
@@ -93,7 +93,7 @@ namespace lab_projekt
         }
         void OnClick3(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/LoginPage.xaml", UriKind.Relative));
         }
     }
 }
