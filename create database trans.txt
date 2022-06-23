@@ -1,0 +1,44 @@
+CREATE DATABASE trans;
+GO
+Use trans
+Go
+CREATE TABLE [dbo].[users](
+	[id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[login] [varchar](64) NOT NULL,
+	[password] [varchar](18) NOT NULL,
+	[admin] [bit] NOT NULL)
+
+ CREATE TABLE [dbo].[repairs](
+	[id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[car_id] [int] NOT NULL,
+	[details] [text] NOT NULL,
+	[date] [smalldatetime] NOT NULL)
+CREATE TABLE [dbo].[employee](
+	[id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[firstname] [varchar](64) NOT NULL,
+	[lastname] [varchar](64) NOT NULL,
+	[phone] [varchar](12) NOT NULL)
+CREATE TABLE [dbo].[cars](
+	[id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[employee_id] [int] NOT NULL,
+	[Make] [varchar](64) NOT NULL,
+	[Model] [varchar](64) NOT NULL,
+	[under_warranty] [bit] NOT NULL,
+	[insurance] [smalldatetime] NOT NULL)
+
+ALTER TABLE [dbo].[repairs] ADD  CONSTRAINT [FK_repairs_cars] FOREIGN KEY([car_id])
+REFERENCES [dbo].[cars] ([id])
+ALTER TABLE [dbo].[cars]  ADD  CONSTRAINT [FK_cars_employee] FOREIGN KEY([employee_id])
+REFERENCES [dbo].[employee] ([id])
+
+INSERT INTO dbo.users(login, password, admin) 
+VALUES ('admin', 'admin', 1)  ,('nieadmin', 'admin', 0)
+
+INSERT INTO dbo.employee(firstname, lastname, phone) 
+VALUES ('Daniel', 'Trucker', '+4800011556'), ('Pawel', 'Mann', '+48993945729'), ('Dave', 'Trucker', '+44112233455')
+
+INSERT INTO dbo.cars(employee_id, Make, Model, under_warranty, insurance) 
+VALUES (1, 'DAF', 'XC100', 1, '2022-07-19'), (2, 'MAN', '12.205', 0, '2022.06.01'), (3, 'IVECO', 'PC100', 1, '2023.06.06')
+
+INSERT INTO dbo.repairs(car_id, details, date) 
+VALUES (1, 'wymiana szyby czołowej przedniej lekkoprzyciemnianej', '2022.06.02'), (2, 'wymiana turbiny wstecznej lekkodoładowującej', '2022.05.03')  
