@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace lab_projekt
 {
-    /// <summary>
-    /// Logika interakcji dla klasy Login.xaml
-    /// </summary>
     public partial class LoginPage : Page
     {
         public LoginPage()
@@ -34,11 +31,11 @@ namespace lab_projekt
                 var users = from u in db.Users
                             select u;
 
-                if (db.Users.Any(o => o.Username == l))
+                if (db.Users.Any(o => o.Login == l))
                 {
                     foreach (var item in users)
                     {
-                        if (l == item.Username)
+                        if (l == item.Login)
                         {
                             if (p == item.Password)
                             {

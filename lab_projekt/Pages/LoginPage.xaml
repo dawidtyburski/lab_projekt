@@ -10,13 +10,8 @@
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="10pt"/>
             <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
-        </Style>
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="FontSize" Value="10pt"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
         </Style>
         <Style TargetType="{x:Type PasswordBox}">
             <Setter Property="FontSize" Value="10pt"/>
@@ -27,16 +22,22 @@
     </Page.Resources>
 
     <Grid>
-        <Image Source="/images/log.jpg" Height="200" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,120"/>
+        <Image Source="/images/delivery-truck.png" Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,150"/>
         
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50">
-            <TextBlock Text="Login"></TextBlock>
-            <TextBox Name="Login"  BorderThickness="2" Width="200" Height="20" MaxLength="15" MaxLines="1" Margin="0,0,0,5"/>
-            <TextBlock Text="Hasło"></TextBlock>
-            <PasswordBox Name="Password"  BorderThickness="2" Width="200" Height="20" MaxLength="15" Margin="0,0,0,5"/>
-            <Button Name="btn1"  Click="OnClick1" ClickMode="Press" Margin="0,0,0,2">Zaloguj</Button>
-            <Button Name="btn2"  Click="OnClick2" ClickMode="Press" Margin="0,0,0,2">Zarejestruj</Button>
-            <Button Name="btn3"  Click="OnClick3" ClickMode="Press" Margin="0,0,0,2">Wyjdź</Button>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
+            <StackPanel Orientation ="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
+                <Image Source="/images/login.png" Height="20" Width="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                <TextBox Name="Login"  BorderThickness="1" Width="200" Height="20" MaxLength="15" MaxLines="1" Margin="0,0,0,5"/>
+            </StackPanel>
+            <StackPanel Orientation ="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
+                <Image Source="/images/padlock.png" Height="20" Width="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                <PasswordBox Name="Password"  BorderThickness="1" Width="200" Height="20" MaxLength="15" Margin="0,0,0,5"/>
+            </StackPanel>
+
+
+            <Button Name="btn1"  Click="OnClick1" ClickMode="Press" Width="150" Height="20" Margin="0,0,0,2">Zaloguj</Button>
+            <Button Name="btn2"  Click="OnClick2" ClickMode="Press" Width="150" Height="20" Margin="0,0,0,2">Zarejestruj</Button>
+            <Button Name="btn3"  Click="OnClick3" ClickMode="Press" Width="150" Height="20" Margin="0,0,0,2">Wyjdź</Button>
         </StackPanel>
     </Grid>
 </Page>

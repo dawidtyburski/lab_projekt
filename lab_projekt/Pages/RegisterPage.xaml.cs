@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Models;
 
 namespace lab_projekt
 {
-    /// <summary>
-    /// Logika interakcji dla klasy RegisterPage.xaml
-    /// </summary>
+
     public partial class RegisterPage : Page
     {
         public RegisterPage()
@@ -38,7 +28,7 @@ namespace lab_projekt
                             select u;
                 foreach (var item in users)
                 {
-                    if (l == item.Username)
+                    if (l == item.Login)
                     {
                         if (p == item.Password)
                         {
@@ -70,13 +60,13 @@ namespace lab_projekt
                     string l = Login.Text;
                     string p = Password.Password;
 
-                    if (db.Users.Any(o => o.Username == l))
+                    if (db.Users.Any(o => o.Login == l))
                     {
                         MessageBox.Show("Login zajęty", "wrong_login", MessageBoxButton.OK);
                         return;
                     }
 
-                    db.Add(new User() { Username = l, Password = p, Admin = false });
+                    db.Add(new User() { Login = l, Password = p, Admin = false });
                     db.SaveChanges();
                     
                     var result = MessageBox.Show("Użytkownik dodany", "new_user", MessageBoxButton.OK);

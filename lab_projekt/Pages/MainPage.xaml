@@ -5,13 +5,121 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:lab_projekt"
       mc:Ignorable="d" >
+    <Page.Resources>
+        <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle1}"/>
+        </Style>
+        <Style x:Key="ColumnHeaderStyle1" TargetType="DataGridColumnHeader">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1 1 1 1"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,15,0" Width="865" Height="30">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,5,15,0" Width="865" Height="30">
 
-            <Button Name="btn1"  Click="OnClick1" ClickMode="Press" Margin="5,5,0,0">Dodaj Pojazd</Button>
-            <Button Name="btn2"  Click="OnClick2" ClickMode="Press" Margin="5,5,0,0">Dodaj Kierowce</Button>
+
+            <Button Name="btn1" Click="OnClick1" ClickMode="Press" Margin="5,5,0,0" Height="25" Width="100" Cursor="Hand" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/images/plus.png" Height="15" Width="15" VerticalAlignment="Center"/>
+                    <TextBlock Margin="0,0" FontSize="10">Dodaj Pojazd</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Name="btn2" Click="OnClick2" ClickMode="Press" Margin="5,5,0,0" Height="25" Width="100" Cursor="Hand" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/images/plus.png" Height="15" Width="15" VerticalAlignment="Center"/>
+                    <TextBlock Margin="0,0" FontSize="10">Dodaj Kierowce</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Name="btn5" Click="OnClick5" ClickMode="Press" Margin="5,5,0,0" Height="25" Width="100" Cursor="Hand" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/images/exit-full-screen.png" Height="15" Width="15" VerticalAlignment="Center"/>
+                    <TextBlock Margin="0,0" FontSize="10">Zamknij</TextBlock>
+                </StackPanel>
+            </Button>
         </StackPanel>
-        <TreeView Margin="10,10,10,10" Name="TreeView1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="865" Height="500"></TreeView>
+        <StackPanel x:Name="AddTruck" Visibility="Hidden" Width ="400" Height="600" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,50,0,0" Background="White">
+            <Grid ShowGridLines="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <TextBlock Text="Nr rejestracyjny" Height="20" Grid.Row="0" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="Marka" Height="20" Grid.Row="1" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="Model" Height="20" Grid.Row="2" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="VIN" Height="20" Grid.Row="3" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="Kierowca" Height="20" Grid.Row="4" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBox Name="Plate"  BorderThickness="2" Width="200" Height="20" MaxLength="15" MaxLines="1" Grid.Row="0" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                <TextBox Name="Brand"  BorderThickness="2" Width="200" Height="20" MaxLength="15" MaxLines="1" Grid.Row="1" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                <TextBox Name="Model"  BorderThickness="2" Width="200" Height="20" MaxLength="15" MaxLines="1" Grid.Row="2" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                <TextBox Name="VIN"  BorderThickness="2" Width="200" Height="20" MaxLength="15" MaxLines="1" Grid.Row="3" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                <ComboBox SelectedIndex ="0" Name="ComboBox" Width="200" Height="20" Grid.Row="4" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></ComboBox>
+            </Grid>
+            <Button Name="btn3"  Click="OnClick3" ClickMode="Press" Margin="2,2,2,2" Width="100" Height="20" FontSize="10">Dodaj</Button>
+            <Button Name="btn4"  Click="OnClick4" ClickMode="Press" Margin="2,2,2,2" Width="100" Height="20" FontSize="10">Zamknij</Button>
+        </StackPanel>
+              
+        <StackPanel x:Name="Grid" Visibility="Visible" Width ="865" Height="600" HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="0,50,0,0" Background="White">
+
+            <DataGrid AutoGenerateColumns="False" 
+          HorizontalAlignment="Left" 
+          Name="dataGrid1" 
+          IsReadOnly="True"
+          CanUserResizeRows="False"
+          CanUserResizeColumns="False"
+          Style="{DynamicResource DataGridStyle1}">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Informacje" Click="Context_Details" FontSize="10">
+                            <MenuItem.Icon>
+                                <Image Width="15" Height="15" Source="/images/notepad.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Usuń" Click="Context_Delete" FontSize="10">
+                            <MenuItem.Icon>
+                                <Image Width="15" Height="15" Source="/images/delete.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" >
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Orange"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="Background" Value="GhostWhite"/>
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="FontSize" Value="10"></Setter>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header ="Nr Rejestracyjny"  Binding="{Binding Path=Plate}" MinWidth="150"/>
+                    <DataGridTextColumn Header ="Marka,Model" Binding="{Binding Path=BrandModel}" MinWidth="150" />
+                    <DataGridTextColumn Header ="Nr VIN" Binding="{Binding Path=VIN}" MinWidth="150" />
+                    <DataGridTextColumn Header ="Przypisany Kierowca" Binding="{Binding Path=Driver}" MinWidth="150" />
+                    <DataGridTextColumn Header ="Nr Telefonu" Binding="{Binding Path=DriverPhone}" MinWidth="150" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel>
+
 
     </Grid>
 

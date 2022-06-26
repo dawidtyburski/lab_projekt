@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab_projekt"
-        Height="400" Width="350" 
+        Height="300" Width="250" 
         ResizeMode="CanMinimize"
         SizeToContent="Manual"
+        WindowStyle="ToolWindow"
         Title="MyTrucks">
 
     <Grid>
