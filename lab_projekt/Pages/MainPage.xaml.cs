@@ -3,6 +3,7 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,19 +33,18 @@ namespace lab_projekt
             public string DriverPhone { get; set; }
 
         }
-        public class Repairs
-        {
-            public string Name { get; set; }
-            //public string Date { get; set; }
-        }
         public MainPage()
         {
             InitializeComponent();
             BuildHeader();
         }
+
+        public ObservableCollection<Header> list = new ObservableCollection<Header>();
+        public static int index;
+
         private void BuildHeader()
         {
-            var list = new ObservableCollection<Header>();
+            
 
             using (ProjektDbContext db = new ProjektDbContext())
             {
@@ -59,15 +59,8 @@ namespace lab_projekt
 
                     list.Add(new Header() { Plate = item.Plate, BrandModel = $"{item.Brand} {item.Model}", VIN = item.VIN, Driver = $"{item.Driver.Firstname} {item.Driver.Lastname}", DriverPhone = item.Driver.Phone });
                 }
-
                 dataGrid1.ItemsSource = list;
-
-                //var repairs = db.Trucks.Include(x => x.Repairs).ToList();
             }
-        }
-        public void UpdateHeader()
-        {
-            BuildHeader();
         }
         void OnClick1(object sender, RoutedEventArgs e)
         {
@@ -124,6 +117,27 @@ namespace lab_projekt
 
         void Context_Details(object sender, RoutedEventArgs e)
         {
+            Info win = new Info();
+            win.Show();
+
+            if (dataGrid1 != null)
+            {
+                index = dataGrid1.SelectedIndex;
+                using (ProjektDbContext db = new ProjektDbContext())
+                {
+                    var truck = from t in db.Trucks
+                                where t.Plate == list[index].Plate
+                                select t;
+                                       
+                    foreach(var t in truck)
+                    {
+                        win.Rej.Text = t.Plate;
+                        win.OC.Text = t.Insurance.ToShortDateString();
+                        win.PT.Text = t.TechReview.ToShortDateString();
+                        win.Tacho.Text = t.TachoLeg.ToShortDateString();
+                   }
+                }                  
+            }
         }
         void Context_Delete(object sender, RoutedEventArgs e)
         {
