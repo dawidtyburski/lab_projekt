@@ -14,6 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace lab_projekt
@@ -67,6 +68,7 @@ namespace lab_projekt
                     }
                 }
                 db.SaveChanges();
+
             }
         }
         void dataGrid2_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)

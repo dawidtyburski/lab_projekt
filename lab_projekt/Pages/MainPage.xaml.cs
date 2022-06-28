@@ -26,6 +26,7 @@ namespace lab_projekt
     {
         public class Header
         {
+            public string State { get; set; }
             public string Plate { get; set; }
             public string BrandModel { get; set; }
             public string VIN { get; set; }
@@ -33,6 +34,7 @@ namespace lab_projekt
             public string DriverPhone { get; set; }
 
         }
+
         public MainPage()
         {
             InitializeComponent();
@@ -40,8 +42,8 @@ namespace lab_projekt
         }
 
         public ObservableCollection<Header> list = new ObservableCollection<Header>();
-
-        private void BuildHeader()
+        
+        public void BuildHeader()
         { 
             using (ProjektDbContext db = new ProjektDbContext())
             {
@@ -50,13 +52,34 @@ namespace lab_projekt
                         .ToList();
                 var trucks = from t in db.Trucks
                              select t;
-                list.Clear();
+                list.Clear();              
                 foreach (var item in trucks)
                 {
-                    list.Add(new Header() { Plate = item.Plate, BrandModel = $"{item.Brand} {item.Model}", VIN = item.VIN, Driver = $"{item.Driver.Firstname} {item.Driver.Lastname}", DriverPhone = item.Driver.Phone });
+                    string source = null;
+                    TimeSpan diff1 = DateTime.Now - Convert.ToDateTime(item.Insurance);
+                    int days1 = (int)Math.Abs(Math.Round(diff1.TotalDays));
+
+                    TimeSpan diff2 = DateTime.Now - Convert.ToDateTime(item.TechReview);
+                    int days2 = (int)Math.Abs(Math.Round(diff2.TotalDays));
+
+                    TimeSpan diff3 = DateTime.Now - Convert.ToDateTime(item.TachoLeg);
+                    int days3 = (int)Math.Abs(Math.Round(diff3.TotalDays));
+
+                    if (days1 < 7 || days2 < 7 || days3 < 7)
+                    {
+                        source = "/images/warning.png";
+                    }
+                    else
+                        source = "/images/check.png";
+
+                    list.Add(new Header() {State = source, Plate = item.Plate, BrandModel = $"{item.Brand} {item.Model}", VIN = item.VIN, Driver = $"{item.Driver.Firstname} {item.Driver.Lastname}", DriverPhone = item.Driver.Phone });
                 }
                 dataGrid1.ItemsSource = list;
             }
+        }
+        void OnClick0(object sender, RoutedEventArgs e)
+        {
+            BuildHeader();
         }
         void OnClick1(object sender, RoutedEventArgs e)
         {

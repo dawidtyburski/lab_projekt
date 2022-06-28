@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\check.png" />
     <None Remove="images\delete.png" />
     <None Remove="images\delivery-truck.png" />
     <None Remove="images\exit-full-screen.png" />
@@ -16,6 +17,8 @@
     <None Remove="images\notepad.png" />
     <None Remove="images\padlock.png" />
     <None Remove="images\plus.png" />
+    <None Remove="images\refresh.png" />
+    <None Remove="images\warning.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="images\check.png" />
     <Resource Include="images\delete.png" />
     <Resource Include="images\delivery-truck.png" />
     <Resource Include="images\exit-full-screen.png" />
@@ -37,6 +41,8 @@
     <Resource Include="images\notepad.png" />
     <Resource Include="images\padlock.png" />
     <Resource Include="images\plus.png" />
+    <Resource Include="images\refresh.png" />
+    <Resource Include="images\warning.png" />
   </ItemGroup>
 
 </Project>

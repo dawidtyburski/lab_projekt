@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab_projekt"
-        Height="600" Width="760" 
+        Height="600" Width="780" 
         ResizeMode="CanMinimize"
         SizeToContent="Manual"
         WindowStyle="ToolWindow"
@@ -14,6 +14,6 @@
         <Grid.Background>
             <SolidColorBrush Color="White" />
         </Grid.Background>
-        <Frame Source="/Pages/MainPage.xaml" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name ="frame" Source="/Pages/MainPage.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
