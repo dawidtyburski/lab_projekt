@@ -29,7 +29,7 @@ namespace lab_projekt
             public string Plate { get; set; }
             public string BrandModel { get; set; }
             public string VIN { get; set; }
-            public string Driver { get; set; }
+            public ComboBox Driver { get; set; }
             public string DriverPhone { get; set; }
 
         }
@@ -45,6 +45,20 @@ namespace lab_projekt
         { 
             using (ProjektDbContext db = new ProjektDbContext())
             {
+                List<string> driversList = new List<string>();
+                var dr = from d in db.Drivers
+                         select d;
+                foreach (var d in dr)
+                {
+                    driversList.Add($"{d.Firstname} {d.Lastname}");
+
+                }
+                ComboBox1.ItemsSource = driversList;
+
+                ComboBox temp = new ComboBox();
+                temp.ItemsSource = driversList;
+                temp.value
+
                 var drivers = db.Trucks
                         .Include(b => b.Driver)
                         .ToList();
@@ -53,9 +67,49 @@ namespace lab_projekt
                 list.Clear();
                 foreach (var item in trucks)
                 {
-                    list.Add(new Header() { Plate = item.Plate, BrandModel = $"{item.Brand} {item.Model}", VIN = item.VIN, Driver = $"{item.Driver.Firstname} {item.Driver.Lastname}", DriverPhone = item.Driver.Phone });
+                    list.Add(new Header() { Plate = item.Plate, BrandModel = $"{item.Brand} {item.Model}", VIN = item.VIN, Driver = temp, DriverPhone = item.Driver.Phone });
                 }
                 dataGrid1.ItemsSource = list;
+            }
+        }
+        void dataGrid1_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var column = e.Column as DataGridBoundColumn;
+                if (column != null)
+                {
+                    var bindingPath = (column.Binding as Binding).Path.Path;
+                    if (bindingPath == "Przypisany Kierowca")
+                    {
+                        int rowIndex = e.Row.GetIndex();
+                        using (ProjektDbContext db = new ProjektDbContext())
+                        {
+                            var trucks = from t in db.Trucks
+                                      where t.Plate == list[dataGrid1.SelectedIndex].Plate
+                                      select t;
+
+                            string cb = null;
+                            for (int i = 0; i < this.dataGrid1.Columns.Count; i++)
+                            {
+                                ComboBox cb1 = dataGrid1.Columns[3].GetCellContent(dataGrid1.Items[i]) as ComboBox;
+                                cb = cb1.Text;
+                            }
+                            string[] cb1Text = cb.Split(' ');
+                            var id = (from d in db.Drivers where d.Firstname == cb1Text[0] && d.Lastname == cb1Text[1] select d);
+                            
+                            foreach(var d in id)
+                            {
+                                foreach (var t in trucks)
+                                {
+                                    t.DriverId = d.Id;
+                                }
+                            }
+                            db.SaveChanges();
+                            BuildHeader();
+                        }
+                    }
+                }
             }
         }
         void OnClick1(object sender, RoutedEventArgs e)
