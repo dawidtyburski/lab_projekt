@@ -39,9 +39,31 @@ namespace lab_projekt
         }
         void OnClick1(object sender, RoutedEventArgs e)
         {
+            using (ProjektDbContext db = new ProjektDbContext())
+            {
+                var trucks = from t in db.Trucks
+                              where t.Id == i
+                              select t;
+                foreach(var t in trucks)
+                {
+                    if(!t.Insurance.ToShortDateString().Equals(OC.Text))
+                    {
+                        t.Insurance = Convert.ToDateTime(OC.Text);
+                    }
+                    if (!t.TechReview.ToShortDateString().Equals(PT.Text))
+                    {
+                        t.TechReview = Convert.ToDateTime(PT.Text);
+                    }
+                    if (!t.TachoLeg.ToShortDateString().Equals(Tacho.Text))
+                    {
+                        t.TachoLeg = Convert.ToDateTime(Tacho.Text);
+                    }
 
+                }
+                db.SaveChanges();
+
+            }
         }
-
         void dataGrid2_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)

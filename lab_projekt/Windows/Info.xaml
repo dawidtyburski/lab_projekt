@@ -77,6 +77,7 @@
             ScrollViewer.VerticalScrollBarVisibility="Visible"
             CellEditEnding="dataGrid2_CellEditEnding" 
           HorizontalAlignment="Center" 
+          HeadersVisibility = "Row,Column"
           Name="dataGrid2" 
           CanUserResizeRows="False"
           CanUserResizeColumns="False"

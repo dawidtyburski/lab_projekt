@@ -104,6 +104,7 @@
             ScrollViewer.CanContentScroll="True" 
             ScrollViewer.VerticalScrollBarVisibility="Visible"
           HorizontalAlignment="Left" 
+          HeadersVisibility = "Row,Column"
           Name="dataGrid1" 
           IsReadOnly="True"
           CanUserResizeRows="False"
