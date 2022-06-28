@@ -117,11 +117,13 @@ namespace lab_projekt
             using (ProjektDbContext db = new ProjektDbContext())
             {
                 AddRepairDialog inputDialog = new AddRepairDialog();
+
+                
                 if (inputDialog.ShowDialog() == true)
                 {
                     int n = Int32.TryParse(inputDialog.mileageAnswer, out n) ? n : 0;
-
-                    db.Repairs.Add(new Repair() { TruckId = i, Name = inputDialog.nameAnswer, Date = Convert.ToDateTime(inputDialog.dateAnswer), Mileage = n });
+                    DateTime dt = DateTime.TryParse(inputDialog.dateAnswer, out dt) ? dt : DateTime.Now;
+                    db.Repairs.Add(new Repair() { TruckId = i, Name = inputDialog.nameAnswer, Date = Convert.ToDateTime(dt), Mileage = n });
                     db.SaveChanges();
                     BuildHeader(i);
                 }
