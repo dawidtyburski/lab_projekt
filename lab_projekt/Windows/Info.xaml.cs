@@ -69,9 +69,6 @@ namespace lab_projekt
                 }
             }
         }
-
-        
-
         void OnClick2(object sender, RoutedEventArgs e)
         {
             using (ProjektDbContext db = new ProjektDbContext())
