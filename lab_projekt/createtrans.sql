@@ -12,6 +12,7 @@ CREATE TABLE [dbo].[Users](
 	[Id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	[TruckId] [int] NOT NULL,
 	[Name] [varchar](12) NOT NULL,
+	[Mileage] [int] NOT NULL,
 	[Date] [datetime] NOT NULL)
 CREATE TABLE [dbo].[Drivers](
 	[Id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
