@@ -28,6 +28,7 @@ namespace lab_projekt
         {
             public string Name { get; set; }
             public string Date { get; set; }
+            public int Mileage { get; set; }
 
         }
         public ObservableCollection<Header> list2 = new ObservableCollection<Header>();
@@ -46,22 +47,26 @@ namespace lab_projekt
                               select t;
                 foreach(var t in trucks)
                 {
-                    if(!t.Insurance.ToShortDateString().Equals(OC.Text))
+                    try
                     {
-                        t.Insurance = Convert.ToDateTime(OC.Text);
+                        if (!t.Insurance.ToShortDateString().Equals(OC.Text))
+                        {
+                            t.Insurance = Convert.ToDateTime(OC.Text);
+                        }
+                        if (!t.TechReview.ToShortDateString().Equals(PT.Text))
+                        {
+                            t.TechReview = Convert.ToDateTime(PT.Text);
+                        }
+                        if (!t.TachoLeg.ToShortDateString().Equals(Tacho.Text))
+                        {
+                            t.TachoLeg = Convert.ToDateTime(Tacho.Text);
+                        }
                     }
-                    if (!t.TechReview.ToShortDateString().Equals(PT.Text))
+                    catch
                     {
-                        t.TechReview = Convert.ToDateTime(PT.Text);
                     }
-                    if (!t.TachoLeg.ToShortDateString().Equals(Tacho.Text))
-                    {
-                        t.TachoLeg = Convert.ToDateTime(Tacho.Text);
-                    }
-
                 }
                 db.SaveChanges();
-
             }
         }
         void dataGrid2_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -88,6 +93,22 @@ namespace lab_projekt
                             BuildHeader(i);                           
                         }
                     }
+                    else if (bindingPath == "Mileage")
+                    {
+                        int rowIndex = e.Row.GetIndex();
+                        using (ProjektDbContext db = new ProjektDbContext())
+                        {
+                            var rep = from r in db.Repairs
+                                      where r.Name == list2[rowIndex].Name
+                                      select r;
+                            foreach (var r in rep)
+                            {
+                                r.Mileage = Int32.Parse((e.EditingElement as TextBox).Text);
+                            }
+                            db.SaveChanges();
+                            BuildHeader(i);
+                        }
+                    }
                 }
             }
         }
@@ -98,7 +119,9 @@ namespace lab_projekt
                 AddRepairDialog inputDialog = new AddRepairDialog();
                 if (inputDialog.ShowDialog() == true)
                 {
-                    db.Repairs.Add(new Repair() { TruckId = i, Name = inputDialog.nameAnswer, Date = Convert.ToDateTime(inputDialog.dateAnswer) });
+                    int n = Int32.TryParse(inputDialog.mileageAnswer, out n) ? n : 0;
+
+                    db.Repairs.Add(new Repair() { TruckId = i, Name = inputDialog.nameAnswer, Date = Convert.ToDateTime(inputDialog.dateAnswer), Mileage = n });
                     db.SaveChanges();
                     BuildHeader(i);
                 }
@@ -116,7 +139,7 @@ namespace lab_projekt
 
                 foreach (var item in rr)
                 {
-                    list2.Add(new Header() { Name = item.Name, Date = item.Date.ToShortDateString() });
+                    list2.Add(new Header() { Name = item.Name, Date = item.Date.ToShortDateString(), Mileage = item.Mileage});
                 }
                 dataGrid2.ItemsSource = list2;
 

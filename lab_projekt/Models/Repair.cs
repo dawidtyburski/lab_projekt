@@ -16,6 +16,7 @@ namespace Models
         public Truck Truck { get; set; }
         [Range(typeof(DateTime), "1/1/1900", "6/6/2079")]
         public DateTime Date { get; set; }
+        public int Mileage { get; set; }
 
     }
 }
