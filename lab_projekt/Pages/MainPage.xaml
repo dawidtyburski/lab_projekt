@@ -71,15 +71,44 @@
             <Button Name="btn3"  Click="OnClick3" ClickMode="Press" Margin="2,2,2,2" Width="100" Height="20" FontSize="10">Dodaj</Button>
             <Button Name="btn4"  Click="OnClick4" ClickMode="Press" Margin="2,2,2,2" Width="100" Height="20" FontSize="10">Zamknij</Button>
         </StackPanel>
-              
-        <StackPanel x:Name="Grid" Visibility="Visible" Width ="865" Height="600" HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="0,50,0,0" Background="White">
+
+        <StackPanel x:Name="AddDriver" Visibility="Hidden" Width ="400" Height="600" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,50,0,0" Background="White">
+            <Grid ShowGridLines="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <TextBlock Text="Imię" Height="20" Grid.Row="0" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="Nazwisko" Height="20" Grid.Row="1" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="Nr telefonu" Height="20" Grid.Row="2" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBox Name="Firstname"  BorderThickness="2" Width="200" Height="20" MaxLength="15" MaxLines="1" Grid.Row="0" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                <TextBox Name="Lastname"  BorderThickness="2" Width="200" Height="20" MaxLength="15" MaxLines="1" Grid.Row="1" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                <TextBox Name="Phone"  BorderThickness="2" Width="200" Height="20" MaxLength="15" MaxLines="1" Grid.Row="2" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+            </Grid>
+            <Button Name="btn6"  Click="OnClick6" ClickMode="Press" Margin="2,2,2,2" Width="100" Height="20" FontSize="10">Dodaj</Button>
+            <Button Name="btn7"  Click="OnClick7" ClickMode="Press" Margin="2,2,2,2" Width="100" Height="20" FontSize="10">Zamknij</Button>
+        </StackPanel>
+
+        <StackPanel x:Name="Grid" Visibility="Visible" Width ="865" Height="500" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin ="0,50,0,0" Background="White">
 
             <DataGrid AutoGenerateColumns="False" 
+            ScrollViewer.CanContentScroll="True" 
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
           HorizontalAlignment="Left" 
           Name="dataGrid1" 
           IsReadOnly="True"
           CanUserResizeRows="False"
           CanUserResizeColumns="False"
+          Height="500"
           Style="{DynamicResource DataGridStyle1}">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
@@ -115,7 +144,7 @@
                     <DataGridTextColumn Header ="Marka,Model" Binding="{Binding Path=BrandModel}" MinWidth="150" />
                     <DataGridTextColumn Header ="Nr VIN" Binding="{Binding Path=VIN}" MinWidth="150" />
                     <DataGridTextColumn Header ="Przypisany Kierowca" Binding="{Binding Path=Driver}" MinWidth="150" />
-                    <DataGridTextColumn Header ="Nr Telefonu" Binding="{Binding Path=DriverPhone}" MinWidth="150" />
+                    <DataGridTextColumn Header ="Nr Telefonu" Binding="{Binding Path=DriverPhone}" MinWidth="121" />
                 </DataGrid.Columns>
             </DataGrid>
 

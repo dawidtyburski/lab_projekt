@@ -40,12 +40,9 @@ namespace lab_projekt
         }
 
         public ObservableCollection<Header> list = new ObservableCollection<Header>();
-        public static int index;
 
         private void BuildHeader()
-        {
-            
-
+        { 
             using (ProjektDbContext db = new ProjektDbContext())
             {
                 var drivers = db.Trucks
@@ -53,10 +50,9 @@ namespace lab_projekt
                         .ToList();
                 var trucks = from t in db.Trucks
                              select t;
-
+                list.Clear();
                 foreach (var item in trucks)
                 {
-
                     list.Add(new Header() { Plate = item.Plate, BrandModel = $"{item.Brand} {item.Model}", VIN = item.VIN, Driver = $"{item.Driver.Firstname} {item.Driver.Lastname}", DriverPhone = item.Driver.Phone });
                 }
                 dataGrid1.ItemsSource = list;
@@ -80,7 +76,10 @@ namespace lab_projekt
         }
         void OnClick2(object sender, RoutedEventArgs e)
         {
-
+            AddDriver.Visibility = Visibility.Visible;
+            Grid.Visibility = Visibility.Hidden;
+            btn1.IsEnabled = false;
+            btn2.IsEnabled = false;
         }
         void OnClick3(object sender, RoutedEventArgs e)
         {
@@ -97,7 +96,6 @@ namespace lab_projekt
                 foreach (var d in id)
                 {
                     db.Trucks.Add(new Truck() { Plate = Plate.Text, Brand = Brand.Text, Model = Model.Text, VIN = VIN.Text, DriverId = d.Id, Insurance = DateTime.Now, TechReview = DateTime.Now, TachoLeg = DateTime.Now });
-
                 }
                 db.SaveChanges();
             }
@@ -112,17 +110,38 @@ namespace lab_projekt
         }
         void OnClick5(object sender, RoutedEventArgs e)
         {
-            App.Current.MainWindow.Close();
+            Application.Current.Shutdown();
         }
-
+        void OnClick6(object sender, RoutedEventArgs e)
+        {
+            AddDriver.Visibility = Visibility.Hidden;
+            Grid.Visibility = Visibility.Visible;
+            btn1.IsEnabled = true;
+            btn2.IsEnabled = true;
+            using (ProjektDbContext db = new ProjektDbContext())
+            {
+                db.Drivers.Add(new Driver() { Firstname = Firstname.Text, Lastname = Lastname.Text, Phone = Phone.Text });
+                db.SaveChanges();
+            }
+            ComboBox.Items.Clear();
+        }
+        void OnClick7(object sender, RoutedEventArgs e)
+        {
+            AddDriver.Visibility = Visibility.Hidden;
+            Grid.Visibility = Visibility.Visible;
+            btn1.IsEnabled = true;
+            btn2.IsEnabled = true;
+        }
         void Context_Details(object sender, RoutedEventArgs e)
         {
             Info win = new Info();
             win.Show();
+            
 
             if (dataGrid1 != null)
             {
-                index = dataGrid1.SelectedIndex;
+                var index = dataGrid1.SelectedIndex;
+                
                 using (ProjektDbContext db = new ProjektDbContext())
                 {
                     var truck = from t in db.Trucks
@@ -131,6 +150,8 @@ namespace lab_projekt
                                        
                     foreach(var t in truck)
                     {
+                        var i = t.Id;
+                        win.BuildHeader(i);
                         win.Rej.Text = t.Plate;
                         win.OC.Text = t.Insurance.ToShortDateString();
                         win.PT.Text = t.TechReview.ToShortDateString();

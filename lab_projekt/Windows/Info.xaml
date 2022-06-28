@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab_projekt"
         mc:Ignorable="d" 
-        Height="406" Width="310" 
+        Height="400" Width="360" 
         ResizeMode="CanMinimize"
         SizeToContent="Manual"
         WindowStyle="ToolWindow"
@@ -53,27 +53,42 @@
                 <TextBox Name="Tacho"  Margin="0,0,0,2" BorderThickness="2" Width="100" Height="20" MaxLength="15" MaxLines="1" Grid.Row="2" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
 
             </Grid>
-            <Button Name="btn1"  Click="OnClick1" ClickMode="Press" Margin="0,0,0,0" Width="50" Height="20" FontSize="10" HorizontalAlignment="Right">Zapisz</Button>
-
+            
+            <Button Name="btn1" Click="OnClick1" ClickMode="Press" Margin="0,0,0,0" Height="20" Width="60" Cursor="Hand" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/images/floppy-disk.png" Height="15" Width="15" VerticalAlignment="Center"/>
+                    <TextBlock Margin="2,0" FontSize="10">Zapisz</TextBlock>
+                </StackPanel>
+            </Button>
         </StackPanel>
-        <StackPanel Width ="80" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="2,80,0,0" Background="White">
-            <Button Name="btn2"  Click="OnClick2" ClickMode="Press" Margin="0,0,0,0" Width="80" Height="20" FontSize="10" HorizontalAlignment="Left">Dodaj naprawę</Button>
+        <StackPanel Width ="90" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin ="7,92,0,0" Background="White">
+            
+            <Button Name="btn2" Click="OnClick2" ClickMode="Press" Margin="0,0,0,0" Height="20" Width="90" Cursor="Hand">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/images/plus.png" Height="15" Width="15" VerticalAlignment="Center"/>
+                    <TextBlock Margin="2,0" FontSize="10">Dodaj naprawę</TextBlock>
+                </StackPanel>
+            </Button>
         </StackPanel>
-        <StackPanel  Width ="310" Height="290" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,100,0,0" Background="White">
+        <StackPanel  x:Name="RepairsList" Visibility="Hidden" Orientation="Vertical" Width ="360" Height="250" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin ="0,100,0,0" Background="White">
 
             <DataGrid AutoGenerateColumns="False" 
-          HorizontalAlignment="Left" 
+            ScrollViewer.CanContentScroll="True" 
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
+            CellEditEnding="dataGrid2_CellEditEnding" 
+          HorizontalAlignment="Center" 
           Name="dataGrid2" 
-          IsReadOnly="True"
           CanUserResizeRows="False"
           CanUserResizeColumns="False"
+          Height="250"
+          Width="345"
           Style="{DynamicResource DataGridStyle1}">
                 
                 <DataGrid.CellStyle>
                     <Style TargetType="DataGridCell" >
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Background" Value="Orange"/>
                                 <Setter Property="Foreground" Value="Black"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
@@ -85,8 +100,9 @@
                     </Style>
                 </DataGrid.CellStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header ="Naprawa"  Binding="{Binding Path=Name}" MinWidth="200"/>
-                    <DataGridTextColumn Header ="Data" Binding="{Binding Path=Date}" MinWidth="100" />
+                    <DataGridTextColumn Header =" Naprawa"  Binding="{Binding Path=Name}" MinWidth="140" IsReadOnly="True"/>
+                    <DataGridTextColumn Header =" Data" Binding="{Binding Path=Date}" MinWidth="80" IsReadOnly="False"/>
+                    <DataGridTextColumn Header =" Przebieg" Binding="{Binding Path=Mileage}" MinWidth="100" IsReadOnly="False"/>
                 </DataGrid.Columns>
             </DataGrid>
 

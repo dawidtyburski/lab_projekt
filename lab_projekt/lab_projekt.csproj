@@ -10,6 +10,7 @@
     <None Remove="images\delete.png" />
     <None Remove="images\delivery-truck.png" />
     <None Remove="images\exit-full-screen.png" />
+    <None Remove="images\floppy-disk.png" />
     <None Remove="images\license-plate.png" />
     <None Remove="images\login.png" />
     <None Remove="images\notepad.png" />
@@ -30,6 +31,7 @@
     <Resource Include="images\delete.png" />
     <Resource Include="images\delivery-truck.png" />
     <Resource Include="images\exit-full-screen.png" />
+    <Resource Include="images\floppy-disk.png" />
     <Resource Include="images\license-plate.png" />
     <Resource Include="images\login.png" />
     <Resource Include="images\notepad.png" />
