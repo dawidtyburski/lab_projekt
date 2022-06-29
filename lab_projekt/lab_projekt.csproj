@@ -4,6 +4,10 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>MyTrucks</AssemblyName>
+    <ApplicationIcon>ico.ico</ApplicationIcon>
+    <RootNamespace>MyTrucks</RootNamespace>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

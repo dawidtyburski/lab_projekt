@@ -157,18 +157,34 @@ namespace lab_projekt
         }
         void OnClick6(object sender, RoutedEventArgs e)
         {
-            AddDriver.Visibility = Visibility.Hidden;
-            Grid.Visibility = Visibility.Visible;
-            btn1.IsEnabled = true;
-            btn2.IsEnabled = true;
+            
             using (ProjektDbContext db = new ProjektDbContext())
             {
-                db.Drivers.Add(new Driver() { Firstname = Firstname.Text, Lastname = Lastname.Text, Phone = Phone.Text });
-                db.SaveChanges();
 
-                Firstname.Text = null;
-                Lastname.Text = null;
-                Phone.Text = null;
+                if (db.Drivers.Any(o => o.Firstname == Firstname.Text) && db.Drivers.Any(o => o.Lastname == Lastname.Text))
+                {
+                    var result = MessageBox.Show("Istnieje już taki kierowca", "wrong_plate", MessageBoxButton.OK);
+                    if(result == MessageBoxResult.OK)
+                    {
+                        Firstname.Text = null;
+                        Lastname.Text = null;
+                        Phone.Text = null;
+                    }
+                }
+                else
+                {
+                    db.Drivers.Add(new Driver() { Firstname = Firstname.Text, Lastname = Lastname.Text, Phone = Phone.Text });
+                    db.SaveChanges();
+
+                    AddDriver.Visibility = Visibility.Hidden;
+                    Grid.Visibility = Visibility.Visible;
+                    btn1.IsEnabled = true;
+                    btn2.IsEnabled = true;
+
+                    Firstname.Text = null;
+                    Lastname.Text = null;
+                    Phone.Text = null;
+                }               
             }
             ComboBox.Items.Clear();
         }
