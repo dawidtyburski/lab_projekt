@@ -1,21 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Models;
+﻿using Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace lab_projekt
 {
@@ -89,7 +79,8 @@ namespace lab_projekt
                                      select r;
                            foreach(var r in rep)
                             {
-                                r.Date = Convert.ToDateTime((e.EditingElement as TextBox).Text.ToString());
+                                DateTime dt = DateTime.TryParse((e.EditingElement as TextBox).Text.ToString(), out dt) ? dt : DateTime.Now;
+                                r.Date = dt;
                             }
                             db.SaveChanges();
                             BuildHeader(i);                           
