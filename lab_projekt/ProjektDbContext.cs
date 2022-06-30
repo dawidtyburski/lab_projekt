@@ -7,7 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace lab_projekt
-{
+{  
+    /// <summary>
+    /// Configuring connection to database and set specific models 
+    /// </summary>
     class ProjektDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }

@@ -7,16 +7,24 @@ using Models;
 
 namespace lab_projekt
 {
-
+    /// <summary>
+    /// Logika interakcji dla klasy RegisterPage.xaml
+    /// </summary>
     public partial class RegisterPage : Page
     {
         public RegisterPage()
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// isAdmin storing data or the administrator is logged in
+        /// </summary>
         bool isAdmin = false;
-
+        /// <summary>
+        /// Checking the existence of the administrator and the correctness of the password. If it is correct, isAdmin set to true, if not messagebox shows and isAdmin stay false
+        /// </summary>
+        /// <param name="l">>Name given by the administrator</param>
+        /// <param name="p">Password given by the administrator</param
         void OnClick1(object sender, RoutedEventArgs e)
         {
             using(ProjektDbContext db = new ProjektDbContext())
@@ -51,6 +59,11 @@ namespace lab_projekt
                 }
             }
         }
+        /// <summary>
+        /// Creating a new user, checking if given username is not exist in database, if it is correct insert new user to db and move to LoginPage.xaml
+        /// </summary>
+        /// <param name="l">Name given by the user</param>
+        /// <param name="p">Password given by the user</param>
         void OnClick2(object sender, RoutedEventArgs e)
         {
             using (ProjektDbContext db = new ProjektDbContext())
@@ -80,7 +93,10 @@ namespace lab_projekt
                     MessageBox.Show("Podaj dane administratora", "admin?", MessageBoxButton.OK);
                 }
             }               
-        }
+        }      
+        /// <summary>
+        /// Navigate to LoginPage by cancel button
+        /// </summary>
         void OnClick3(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/LoginPage.xaml", UriKind.Relative));

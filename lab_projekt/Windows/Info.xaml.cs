@@ -14,7 +14,9 @@ namespace lab_projekt
     /// </summary>
     public partial class Info : Window
     {
-
+        /// <summary>
+        /// Class that stores repairs data needed to display the datagrid
+        /// </summary>
         public class Header
         {
             public string Name { get; set; }
@@ -22,13 +24,22 @@ namespace lab_projekt
             public int Mileage { get; set; }
 
         }
-        public ObservableCollection<Header> list2 = new ObservableCollection<Header>();
+        /// <summary>
+        /// List of repairs uses data from class Header
+        /// </summary>
+        public ObservableCollection<Header> list2 = new ObservableCollection<Header>();   
+        /// <summary>
+        /// Store index of selected specific truck
+        /// </summary>
         int i = 0;
 
         public Info()
         {
             InitializeComponent();           
-        }
+        }       
+        /// <summary>
+        /// Allows you to change insurance, technical review and tachograph legalization dates in database
+        /// </summary>
         void OnClick1(object sender, RoutedEventArgs e)
         {
             using (ProjektDbContext db = new ProjektDbContext())
@@ -58,9 +69,11 @@ namespace lab_projekt
                     }
                 }
                 db.SaveChanges();
-
             }
         }
+        /// <summary>
+        /// Allows you to change dates and mileages of repair of specific truck in database, reload datagrid item source
+        /// </summary>
         void dataGrid2_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
@@ -104,14 +117,17 @@ namespace lab_projekt
                     }
                 }
             }
-        }
+        }      
+        /// <summary>
+        /// Open AddRepairDialog.xaml and if it returns true then try parse given date to DateTime and given mileage to int, if it not pass insert fegault values (DateTime.Now and 0)
+        /// Insert new repair to specific truck and reload dataGrid item source
+        /// </summary>
         void OnClick2(object sender, RoutedEventArgs e)
         {
             using (ProjektDbContext db = new ProjektDbContext())
             {
                 AddRepairDialog inputDialog = new AddRepairDialog();
-
-                
+             
                 if (inputDialog.ShowDialog() == true)
                 {
                     int n = Int32.TryParse(inputDialog.mileageAnswer, out n) ? n : 0;
@@ -122,6 +138,11 @@ namespace lab_projekt
                 }
             }
         }
+        /// <summary>
+        /// Downloading data from the database and creating new Header objects and adding them to the list. Loading a data source into a datagrid
+        /// Setting datagrid visibility in relation to list count
+        /// </summary>
+        /// <param name="index">Index of selected specific truck</param>
         public void BuildHeader(int index)
         {
             i = index;
@@ -144,7 +165,6 @@ namespace lab_projekt
                 }
                 else
                     RepairsList.Visibility = Visibility.Hidden;
-
             }
         }
     }

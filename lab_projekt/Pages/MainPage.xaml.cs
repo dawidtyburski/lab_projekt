@@ -13,6 +13,9 @@ namespace lab_projekt
     /// </summary>
     public partial class MainPage : Page
     {
+        /// <summary>
+        /// Class that stores truck data needed to display the datagrid
+        /// </summary>
         public class Header
         {
             public string State { get; set; }
@@ -22,16 +25,20 @@ namespace lab_projekt
             public string Driver { get; set; }
             public string DriverPhone { get; set; }
 
-        }
-
+        }      
+        /// <summary>
+        /// List of trucks uses data from class Header
+        /// </summary>
+        public ObservableCollection<Header> list = new ObservableCollection<Header>();
+        
         public MainPage()
         {
             InitializeComponent();
             BuildHeader();
         }
-
-        public ObservableCollection<Header> list = new ObservableCollection<Header>();
-        
+        /// <summary>
+        /// Downloading data from the database and creating new Header objects and adding them to the list. Loading a data source into a datagrid
+        /// </summary>
         public void BuildHeader()
         { 
             using (ProjektDbContext db = new ProjektDbContext())
@@ -65,11 +72,17 @@ namespace lab_projekt
                 }
                 dataGrid1.ItemsSource = list;
             }
-        }
+        }       
+        /// <summary>
+        /// Reloading list of trucks and ItemSource of datagrid by button 'Odśwież'
+        /// </summary>
         void OnClick0(object sender, RoutedEventArgs e)
         {
             BuildHeader();
         }
+        /// <summary>
+        /// Switching to the add trucks view (AddTruck.xaml) and downloading the list of drivers from the database
+        /// </summary>
         void OnClick1(object sender, RoutedEventArgs e)
         {
             AddTruck.Visibility = Visibility.Visible;
@@ -85,17 +98,22 @@ namespace lab_projekt
                     ComboBox.Items.Add($"{d.Firstname} {d.Lastname}");
                 }
             }
-        }
+        }       
+        /// <summary>
+        /// Switching to the add drivers view (AddDriver.xaml)
+        /// </summary>
         void OnClick2(object sender, RoutedEventArgs e)
         {
             AddDriver.Visibility = Visibility.Visible;
             Grid.Visibility = Visibility.Hidden;
             btn1.IsEnabled = false;
             btn2.IsEnabled = false;
-        }
+        }     
+        /// <summary>
+        /// Adding to database a new truck with parameters given by user, checking if given Plate numbers are not exist in db, reload datagrid ItemSource
+        /// </summary>
         void OnClick3(object sender, RoutedEventArgs e)
-        {
-            
+        {         
             using (ProjektDbContext db = new ProjektDbContext())
             {
                 string[] c = ComboBox.SelectedItem.ToString().Split(' ');
@@ -127,26 +145,32 @@ namespace lab_projekt
                     Brand.Text = null;
                     Model.Text = null;
                     VIN.Text = null;
-
-                }               
-                
+                }                              
             }
             BuildHeader();
-        }
+        }      
+        /// <summary>
+        /// Closing current view and back to list of trucks (dataGrid1)
+        /// </summary>
         void OnClick4(object sender, RoutedEventArgs e)
         {
             AddTruck.Visibility = Visibility.Hidden;
             Grid.Visibility = Visibility.Visible;
             btn1.IsEnabled = true;
             btn2.IsEnabled = true;
-        }
+        }       
+        /// <summary>
+        /// Closing app
+        /// </summary>
         void OnClick5(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
+        /// <summary>
+        /// Adding to database a new driver with parameters given by user, checking if given Firstname and Lastname are not exist in db, reload ComboBox items from adding truck view
+        /// </summary>
         void OnClick6(object sender, RoutedEventArgs e)
-        {
-            
+        {        
             using (ProjektDbContext db = new ProjektDbContext())
             {
 
@@ -177,19 +201,25 @@ namespace lab_projekt
             }
             ComboBox.Items.Clear();
         }
+        /// <summary>
+        /// Closing current view and back to list of trucks (dataGrid1)
+        /// </summary>
         void OnClick7(object sender, RoutedEventArgs e)
         {
             AddDriver.Visibility = Visibility.Hidden;
             Grid.Visibility = Visibility.Visible;
             btn1.IsEnabled = true;
             btn2.IsEnabled = true;
-        }
+        }      
+        /// <summary>
+        /// Opens context details window of specific truck from dataGrid1, shows a plate,insurance date, technical review date and tachograph legalization date  of this truck
+        /// Build data grid of repairs of this specific trucks taken from database
+        /// </summary>
         void Context_Details(object sender, RoutedEventArgs e)
         {
             Info win = new Info();
             win.Show();
             
-
             if (dataGrid1 != null)
             {
                 var index = dataGrid1.SelectedIndex;
@@ -208,10 +238,13 @@ namespace lab_projekt
                         win.OC.Text = t.Insurance.ToShortDateString();
                         win.PT.Text = t.TechReview.ToShortDateString();
                         win.Tacho.Text = t.TachoLeg.ToShortDateString();
-                   }
+                    }
                 }                  
             }
-        }
+        }    
+        /// <summary>
+        /// Delete specific truck and reload datagrid item source
+        /// </summary>
         void Context_Delete(object sender, RoutedEventArgs e)
         {
             if(dataGrid1 != null)
