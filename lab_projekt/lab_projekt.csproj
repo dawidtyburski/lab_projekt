@@ -8,6 +8,7 @@
     <ApplicationIcon>ico.ico</ApplicationIcon>
     <RootNamespace>MyTrucks</RootNamespace>
     <StartupObject></StartupObject>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
